@@ -1,7 +1,7 @@
 from lxml import etree
 
 
-class CommonTemplate(object):
+class CommonTemplate:
 
     headers = {"content-type": "text/xml"}
     body = {}
@@ -22,16 +22,18 @@ class CommonTemplate(object):
 
 class TrafficFlowCompose(CommonTemplate):
 
-    def __init__(self, regionid, county, site, limit=10):
+    def __init__(self, regionid=4, county=1, site=914, limit=10):
         super().__init__()
         self.query.attrib["objecttype"] = "TrafficFlow"
         self.query.attrib["limit"] = str(limit)
         self.filters = etree.SubElement(self.query, "FILTER")
         self.region = etree.SubElement(self.filters, "EQ")
-        self.region.attrib["name"] = "Regionid"  # Stockholm region
+        self.region.attrib["name"] = "RegionId"  # Stockholm region
         self.region.attrib["value"] = str(regionid)
+        self.region = etree.SubElement(self.filters, "EQ")
         self.region.attrib["name"] = "CountyNo"  # Stockholm
         self.region.attrib["value"] = str(county)
+        self.region = etree.SubElement(self.filters, "EQ")
         self.region.attrib["name"] = "SiteId"  # Random Site
         self.region.attrib["value"] = str(site)
 

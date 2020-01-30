@@ -1,11 +1,10 @@
 import mysql.connector
-from tverketresponse import *
 
 
-class DbHelper(object):
+class DbHelper():
 
-    def __init__(self,obj):
-        self.obj= obj
+    def __init__(self, obj):
+        self.obj = obj
 
     def push_data(self):
         cnx = mysql.connector.connect(user='stbt', database='trafikverket')
@@ -15,3 +14,19 @@ class DbHelper(object):
         cursor.execute(self.obj.sql, self.obj.values)
         cnx.commit()
         cnx.close()
+
+    def remove_duplicates(self):
+        cnx = mysql.connector.connect(user='stbt', database='trafikverket')
+        cursor = cnx.cursor()
+        cursor.execute(self.obj.sql_duplicate)
+        cnx.commit()
+        cnx.close()
+
+
+
+
+
+
+
+
+
