@@ -1,3 +1,4 @@
+""" This series of classes will help me frame the API. Right now only supports TrafficFlow"""
 from lxml import etree
 
 
@@ -9,6 +10,7 @@ class CommonTemplate:
     def __init__(self):
         self.start = etree.Element("REQUEST")
         self.login = etree.SubElement(self.start, "LOGIN")
+        # @Todo Authentication key should not be exposed. Figure out a way to hide it.
         self.login.attrib["authenticationkey"] = "760fe1c6be3643dcb51d1762bea44db2"
         self.query = etree.SubElement(self.start, "QUERY")
 
@@ -21,8 +23,8 @@ class CommonTemplate:
 
 
 class TrafficFlowCompose(CommonTemplate):
-
-    def __init__(self, regionid=4, county=1, site=914, limit=10):
+    # @Todo I want a way to ignore the filters also so it can be a generic query.
+    def __init__(self, regionid, county, site, limit=10):
         super().__init__()
         self.query.attrib["objecttype"] = "TrafficFlow"
         self.query.attrib["limit"] = str(limit)

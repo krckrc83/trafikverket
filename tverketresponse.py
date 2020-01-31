@@ -1,3 +1,6 @@
+""" This Class will help with a parser frame and sql pre formatted queries """
+
+
 class TrafficFlowResponse:
 
     sql = "INSERT INTO trafficflow (flow, speed, time) VALUES (%s, %s, %s)"

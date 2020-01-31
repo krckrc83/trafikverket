@@ -1,7 +1,8 @@
+""" This class is a simple helper to insert and maintain the MySQL DB """
 import mysql.connector
 
 
-class DbHelper():
+class DbHelper:
 
     def __init__(self, obj):
         self.obj = obj
@@ -22,11 +23,4 @@ class DbHelper():
         cnx.commit()
         cnx.close()
 
-
-
-
-
-
-
-
-
+    # @ToDo Add more db queries
